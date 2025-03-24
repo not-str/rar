@@ -1,0 +1,32 @@
+data("mtcars")
+View(mtcars)
+str(mtcars)
+names(mtcars)
+row.names(mtcars)
+summary(mtcars$mpg)
+library(dplyr)
+df1 = select(mtcars,c(mpg,hp))
+View(df1)
+df2 = mtcars %>% select(gear,mpg) %>% filter(gear == 4 & mpg >= 20)
+View(df2)
+
+df3 = mtcars %>% mutate(Power = hp*wt)
+View(df3)
+df4 = mtcars %>% arrange(desc(mpg),desc(hp))
+View(df4)
+df5 = mtcars %>% arrange(cyl,desc(mpg))
+View(df5)
+
+df6 = mtcars %>% rename(MilesPerGallon=mpg,Cylinder=cyl)
+View(df6)
+mtcars$gear = as.factor(mtcars$gear)
+str(mtcars)
+
+df7 = mtcars %>% group_by(gear) %>% summarise(n=n(),mean_mpg = mean(mpg),mean_disp = mean(disp))
+View(df7)
+
+hist(mtcars$mpg,main="Milles Per Gallon",xlab="milles",ylab="gallons",col="yellow",border="black")
+barplot(table(mtcars$gear))
+boxplot(mtcars$mpg)
+plot(mtcars$mpg~mtcars$disp)
+
